@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: transaction-service
+    bad_request: 400
+    conflict: 409
+    ok: 200
+
+  datasource:
+    url: jdbc:mariadb://localhost:3306/greenfin_transaction_service
+    username: root
+    password: password
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+server:
+  port: 8084

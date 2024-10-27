@@ -1,0 +1,32 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: user-service
+    bad_request: 400
+    conflict: 409
+    success: 200
+    not_found: 404
+
+  datasource:
+    url: jdbc:mariadb://localhost:3306/greenfin_user_service
+    username: root
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+
+app:
+  config:
+    keycloak:
+      server-url: http://localhost:8571
+      realm: banking-service
+      client-id: banking-service-api-client
+      client-secret: Kn8D44fafR4cbXjSIEVYOGtUkk4aZBfZ
+
