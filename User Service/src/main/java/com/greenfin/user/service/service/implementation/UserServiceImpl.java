@@ -91,7 +91,7 @@ public class UserServiceImpl implements UserService {
 
             User user = User.builder()
                     .emailId(userDto.getEmailId())
-                    .contactNo(userDto.getContactNumber())
+                    .contactNo(userDto.getContactNo())
                     .status(Status.PENDING).userProfile(userProfile)
                     .authId(representations.get(0).getId())
                     .identificationNumber(UUID.randomUUID().toString()).build();
@@ -161,10 +161,10 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFound("User not found on the server"));
 
-        if (FieldChecker.hasEmptyFields(user)) {
+        /*if (FieldChecker.hasEmptyFields(user)) {
             log.error("User is not updated completely");
             throw new EmptyFields("please updated the user", responseCodeNotFound);
-        }
+        }*/
 
         if(userUpdate.getStatus().equals(Status.APPROVED)){
             UserRepresentation userRepresentation = keycloakService.readUser(user.getAuthId());
@@ -210,8 +210,9 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFound("User not found on the server"));
 
-        user.setContactNo(userUpdate.getContactNo());
+
         BeanUtils.copyProperties(userUpdate, user.getUserProfile());
+        user.setContactNo(userUpdate.getContactNo());
         userRepository.save(user);
 
         return Response.builder()

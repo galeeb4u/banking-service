@@ -15,7 +15,7 @@ public class CreateUser {
 
     private String lastName;
 
-    private String contactNumber;
+    private String contactNo;
 
     private String emailId;
 

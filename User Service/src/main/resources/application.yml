@@ -26,7 +26,7 @@ app:
   config:
     keycloak:
       server-url: http://localhost:8571
-      realm: banking-service
-      client-id: banking-service-api-client
-      client-secret: Kn8D44fafR4cbXjSIEVYOGtUkk4aZBfZ
+      realm: greenfin-banking
+      client-id: client-admin
+      client-secret: 9K5zwidlVoSoOHBqHrNzHCs8imdZxZOP
 
