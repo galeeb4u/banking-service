@@ -58,8 +58,8 @@ spring:
         registration:
           banking-service-client:
             provider: keycloak
-            client-id: banking-service-client
-            client-secret: Kn8D44fafR4cbXjSIEVYOGtUkk4aZBfZ
+            client-id: client-admin
+            client-secret: 9K5zwidlVoSoOHBqHrNzHCs8imdZxZOP
             authorization-grant-type: authorization_code
             redirect-uri: http://localhost:8571/login/oauth2/code/keycloak
             scope: openid

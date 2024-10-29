@@ -69,7 +69,7 @@ public class AccountServiceImpl implements AccountService {
         Account account = accountMapper.convertToEntity(accountDto);
         account.setAccountNumber(ACC_PREFIX + String.format("%07d",sequenceService.generateAccountNumber().getAccountNumber()));
         account.setAccountStatus(AccountStatus.PENDING);
-        account.setAvailableBalance(BigDecimal.valueOf(0));
+        account.setAvailableBalance(accountDto.getAvailableBalance());
         account.setAccountType(AccountType.valueOf(accountDto.getAccountType()));
         accountRepository.save(account);
         return Response.builder()
@@ -92,9 +92,9 @@ public class AccountServiceImpl implements AccountService {
 
         return accountRepository.findAccountByAccountNumber(accountNumber)
                 .map(account -> {
-                    if(account.getAccountStatus().equals(AccountStatus.ACTIVE)){
+                    /*if(account.getAccountStatus().equals(AccountStatus.ACTIVE)){
                         throw new AccountStatusException("Account is inactive/closed");
-                    }
+                    }*/
                     if(account.getAvailableBalance().compareTo(BigDecimal.ZERO) < 0 || account.getAvailableBalance().compareTo(BigDecimal.valueOf(1000)) < 0){
                         throw new InSufficientFunds("Minimum balance of Rs.1000 is required");
                     }
@@ -130,9 +130,10 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public Response updateAccount(String accountNumber, AccountDto accountDto) {
 
-        return accountRepository.findAccountByAccountNumber(accountDto.getAccountNumber())
+        return accountRepository.findAccountByAccountNumber(accountNumber)
                 .map(account -> {
-                    BeanUtils.copyProperties(accountDto, account);
+                    //BeanUtils.copyProperties(accountDto, account);
+                    account.setAvailableBalance(accountDto.getAvailableBalance());
                     accountRepository.save(account);
                     return Response.builder()
                             .responseCode(success)
