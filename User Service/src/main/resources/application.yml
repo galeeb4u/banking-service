@@ -25,7 +25,7 @@ spring:
 app:
   config:
     keycloak:
-      server-url: http://192.168.1.7:8571
+      server-url: http://192.168.1.15:8571
       realm: greenfin-banking
       client-id: client-admin
       client-secret: 9K5zwidlVoSoOHBqHrNzHCs8imdZxZOP
