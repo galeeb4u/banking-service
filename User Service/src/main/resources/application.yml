@@ -10,7 +10,7 @@ spring:
     not_found: 404
 
   datasource:
-    url: jdbc:mariadb://localhost:3306/greenfin_user_service
+    url: jdbc:mariadb://192.168.1.17:3306/greenfin_user_service
     username: root
     password: password
   jpa:
@@ -25,7 +25,7 @@ spring:
 app:
   config:
     keycloak:
-      server-url: http://192.168.1.15:8571
+      server-url: http://192.168.1.17:8571
       realm: greenfin-banking
       client-id: client-admin
       client-secret: 9K5zwidlVoSoOHBqHrNzHCs8imdZxZOP

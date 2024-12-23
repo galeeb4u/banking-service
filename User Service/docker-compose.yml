@@ -1,0 +1,52 @@
+#version: "3.7"
+services:
+  api_service:
+    build: .
+    restart: always
+    ports:
+      - 8080:8082
+    depends_on:
+      - maria_db
+    links:
+      - maria_db:app_db
+  maria_db:
+    image: "mariadb:3.2.0"
+    restart: always
+    ports:
+      - 8080:3306
+    environment:
+      MYSQL_DATABASE: greenfin_user_service
+      MYSQL_USER: root
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+
+  my-keycloak:
+    image: quay.io/keycloak/keycloak:24.0
+    container_name: keycloak_web
+    environment:
+      KC_HOSTNAME: http://192.168.1.17
+      KC_HOSTNAME_PORT: 8571
+      KC_HOSTNAME_STRICT_BACKCHANNEL: "true"
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      KC_HEALTH_ENABLED: "true"
+      KC_LOG_LEVEL: info
+   #command:start-dev
+   #depends_on:
+   #  - keycloakdb
+  #ports:
+   #  - 8080:8080
+      #healthcheck:
+        # test: [ "CMD", "curl", "-f", "hhttp://192.168.1.17:8571/health/ready" ]
+        #interval: 15s
+        #timeout: 2s
+        #retries: 15
+      command: [ "start-dev", "--http-port", "8571", "--https-port", "7443" ]
+      ports:
+        - "8571:8571"
+        - "7443:7443"
+       # networks:
+        #  - local_network
+      #networks:
+       #   local_network:
+       #     driver: bridge
