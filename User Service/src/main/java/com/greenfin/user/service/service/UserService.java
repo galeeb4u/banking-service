@@ -5,6 +5,7 @@ import com.greenfin.user.service.model.dto.UserDto;
 import com.greenfin.user.service.model.dto.UserUpdate;
 import com.greenfin.user.service.model.dto.UserUpdateStatus;
 import com.greenfin.user.service.model.dto.response.Response;
+import com.greenfin.user.service.model.entity.User;
 
 import java.util.List;
 
@@ -21,9 +22,9 @@ public interface UserService {
     /**
      * Retrieves a list of all users.
      *
-     * @return          a list of UserDto objects representing all users
+     * @return a list of UserDto objects representing all users
      */
-    List<UserDto> readAllUsers();
+    List<User> readAllUsers();
 
     /**
      * Reads a user from the specified authentication ID.
@@ -31,7 +32,7 @@ public interface UserService {
      * @param  authId  the authentication ID of the user
      * @return         the UserDto object representing the user
      */
-    UserDto readUser(String authId);
+    User readUser(String authId);
 
     /**
      * Updates the status of a user.

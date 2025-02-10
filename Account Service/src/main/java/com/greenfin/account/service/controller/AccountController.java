@@ -7,6 +7,7 @@ import com.greenfin.account.service.model.dto.response.Response;
 import com.greenfin.account.service.service.AccountService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +20,8 @@ import java.util.List;
 @RequestMapping("/accounts")
 public class AccountController {
 
-    private final AccountService accountService;
+    @Autowired
+    private  AccountService accountService;
 
     /**
      * Create an account using the provided accountDto
@@ -109,15 +111,6 @@ public class AccountController {
     @GetMapping("/{userId}")
     public ResponseEntity<AccountDto> readAccountByUserId(@PathVariable Long userId){
         return ResponseEntity.ok(accountService.readAccountByUserId(userId));
-
-
-
-
-
-
-
-
-
 
 
     }

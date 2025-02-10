@@ -5,9 +5,11 @@ import com.greenfin.user.service.model.dto.UserDto;
 import com.greenfin.user.service.model.dto.UserUpdate;
 import com.greenfin.user.service.model.dto.UserUpdateStatus;
 import com.greenfin.user.service.model.dto.response.Response;
+import com.greenfin.user.service.model.entity.User;
 import com.greenfin.user.service.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +22,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserController {
 
-    private final UserService userService;
+    @Autowired
+    private  UserService userService;
 
     /**
      * Creates a new user.
@@ -40,7 +43,7 @@ public class UserController {
      * @return The list of user DTOs
      */
     @GetMapping
-    public ResponseEntity<List<UserDto>> readAllUsers() {
+    public ResponseEntity<List<User>> readAllUsers() {
         return ResponseEntity.ok(userService.readAllUsers());
     }
 
@@ -51,7 +54,7 @@ public class UserController {
      * @return The response entity containing the user DTO.
      */
     @GetMapping("auth/{authId}")
-    public ResponseEntity<UserDto> readUserByAuthId(@PathVariable String authId) {
+    public ResponseEntity<User> readUserByAuthId(@PathVariable String authId) {
         log.info("reading user by authId");
         return ResponseEntity.ok(userService.readUser(authId));
     }
