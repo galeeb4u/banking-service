@@ -130,9 +130,10 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public Response updateAccount(String accountNumber, AccountDto accountDto) {
 
-        return accountRepository.findAccountByAccountNumber(accountDto.getAccountNumber())
+        return accountRepository.findAccountByAccountNumber(accountNumber)
                 .map(account -> {
-                    BeanUtils.copyProperties(accountDto, account);
+                   // BeanUtils.copyProperties(accountDto, account);
+                    account.setAvailableBalance(accountDto.getAvailableBalance());
                     accountRepository.save(account);
                     return Response.builder()
                             .responseCode(success)

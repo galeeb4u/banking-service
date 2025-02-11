@@ -8,7 +8,7 @@ import com.greenfin.account.service.model.dto.external.TransactionResponse;
 
 import java.util.List;
 
-@FeignClient(name = "transaction-service", configuration = FeignConfiguration.class)
+@FeignClient(name = "transaction-service", url="http://localhost:8084/",configuration = FeignConfiguration.class)
 public interface TransactionService {
 
     /**

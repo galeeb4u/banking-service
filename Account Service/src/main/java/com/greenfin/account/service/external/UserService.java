@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import com.greenfin.account.service.configuration.FeignConfiguration;
 import com.greenfin.account.service.model.dto.external.UserDto;
 
-@FeignClient(name = "user-service", configuration = FeignConfiguration.class)
+@FeignClient(name = "user-service",url = "http://localhost:8082", configuration = FeignConfiguration.class)
 public interface UserService {
 
     /**
