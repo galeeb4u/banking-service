@@ -11,7 +11,7 @@ import com.greenfin.fundtransfer.model.dto.response.Response;
 
 import java.util.List;
 
-@FeignClient(name = "transaction-service", configuration = FeignClientConfiguration.class)
+@FeignClient(name = "transaction-service", url = "http://localhost:8084/",configuration = FeignClientConfiguration.class)
 public interface TransactionService {
 
     /**

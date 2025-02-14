@@ -10,7 +10,7 @@ import com.greenfin.fundtransfer.configuration.FeignClientConfiguration;
 import com.greenfin.fundtransfer.model.dto.Account;
 import com.greenfin.fundtransfer.model.dto.response.Response;
 
-@FeignClient(name = "account-service", configuration = FeignClientConfiguration.class)
+@FeignClient(name = "account-service", url="http://localhost:8081/",configuration = FeignClientConfiguration.class)
 public interface AccountService {
 
     /**
