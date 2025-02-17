@@ -138,13 +138,13 @@ class UserServiceImpl implements UserService {
                 user.getUserProfile().setLastName(userUpdate.getOccupation());
             }
             if (!StringUtils.isEmpty(userUpdate.getMaritalStatus())) {
-                user.getUserProfile().setMartialStatus(userUpdate.getMaritalStatus());
+                user.getUserProfile().setMaritalStatus(userUpdate.getMaritalStatus());
             }
             if (!StringUtils.isEmpty(userUpdate.getNationality())){
                 user.getUserProfile().setNationality(userUpdate.getNationality());
                 }
         }
-        user.setContactNo(userUpdate.getContactNo());
+
         userRepository.save(user);
 
         return Response.builder()

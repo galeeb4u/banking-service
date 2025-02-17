@@ -31,7 +31,7 @@ public class UserProfile {
 
     private String occupation;
 
-    private String martialStatus;
+    private String maritalStatus;
 
     private String nationality;
 }
