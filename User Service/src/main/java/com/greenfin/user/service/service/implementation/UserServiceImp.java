@@ -1,7 +1,6 @@
 package com.greenfin.user.service.service.implementation;
 
 
-import com.greenfin.user.service.exception.EmptyFields;
 import com.greenfin.user.service.exception.ResourceConflictException;
 import com.greenfin.user.service.exception.ResourceNotFound;
 import com.greenfin.user.service.external.AccountService;
@@ -19,16 +18,14 @@ import com.greenfin.user.service.repository.UserRepository;
 import com.greenfin.user.service.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.keycloak.representations.idm.UserRepresentation;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.transaction.Transactional;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -118,7 +115,35 @@ class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new ResourceNotFound("User not found on the server"));
 
 
-        BeanUtils.copyProperties(userUpdate, user.getUserProfile());
+        //BeanUtils.copyProperties(userUpdate, user.getUserProfile());
+
+        if(userUpdate != null) {
+
+            if (!StringUtils.isEmpty(userUpdate.getAddress())) {
+                user.getUserProfile().setAddress(userUpdate.getAddress());
+            }
+            if (!StringUtils.isEmpty(userUpdate.getContactNo())) {
+                user.setContactNo(userUpdate.getContactNo());
+            }
+            if (!StringUtils.isEmpty(userUpdate.getFirstName())) {
+                user.getUserProfile().setFirstName(userUpdate.getFirstName());
+            }
+            if (!StringUtils.isEmpty(userUpdate.getLastName())) {
+                user.getUserProfile().setLastName(userUpdate.getLastName());
+            }
+            if (!StringUtils.isEmpty(userUpdate.getGender())) {
+                user.getUserProfile().setGender(userUpdate.getGender());
+            }
+            if (!StringUtils.isEmpty(userUpdate.getOccupation())) {
+                user.getUserProfile().setLastName(userUpdate.getOccupation());
+            }
+            if (!StringUtils.isEmpty(userUpdate.getMaritalStatus())) {
+                user.getUserProfile().setMartialStatus(userUpdate.getMaritalStatus());
+            }
+            if (!StringUtils.isEmpty(userUpdate.getNationality())){
+                user.getUserProfile().setNationality(userUpdate.getNationality());
+                }
+        }
         user.setContactNo(userUpdate.getContactNo());
         userRepository.save(user);
 
